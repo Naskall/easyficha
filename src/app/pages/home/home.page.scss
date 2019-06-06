@@ -55,3 +55,11 @@
     flex-flow: row nowrap;
     justify-content: space-between;
 }
+
+.align-position__badge {
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+    position: relative;
+    right: 0px;
+}
