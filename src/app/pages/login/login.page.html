@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">DS Develop</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="swiper-no-swiping">
+  <ion-segment (ionChange)="segmentChanged($event)" style="margin-top: 20px;">
+    <ion-segment-button checked value="login">
+      <ion-label>Login</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="register">
+      <ion-label>Cadastrar</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-slides>
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+        <h1 class="h1__header">FAÇA O LOGIN PARA CONTINUAR</h1>
+        <ion-item>
+
+          <ion-input type="email" [(ngModel)]="userLogin.email" clearInput placeholder="Digite o e-mail">
+          </ion-input>
+          <ion-label>
+            <ion-icon color="medium" slot="end" name="mail"></ion-icon>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+
+          <ion-input type="password" [(ngModel)]="userLogin.password" clearInput placeholder="Digite a senha">
+          </ion-input>
+          <ion-label>
+            <ion-icon color="medium" slot="end" name="lock"></ion-icon>
+          </ion-label>
+        </ion-item>
+
+        <div class="side-by-side" style="margin-top: 30px;">
+          <ion-item lines="none">
+            <ion-checkbox mode="ios"></ion-checkbox> Lembrar
+          </ion-item>
+          <ion-item lines="none">
+            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+          </ion-item>
+        </div>
+
+        <ion-item lines="none" style="margin-top: 70px;">
+          <ion-button class="default__button" expand="block" (click)="login()">
+            <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            Entrar
+          </ion-button>
+        </ion-item>
+      </div>
+    </ion-slide>
+
+    <!-- TELA DE CADASTRO AO ARRASTAR PARA O LADO -->
+
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+        <h1 class="h1__header">Registre-se para ter acesso</h1>
+        <ion-item>
+
+          <ion-input type="email" [(ngModel)]="userRegister.email" clearInput placeholder="Digite o e-mail">
+
+          </ion-input>
+          <ion-label>
+            <ion-icon color="medium" slot="end" name="mail"></ion-icon>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="userRegister.password" clearInput placeholder="Digite a senha">
+          </ion-input>
+          <ion-label>
+            <ion-icon color="medium" slot="end" name="lock"></ion-icon>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" clearInput placeholder="Repita a senha">
+          </ion-input>
+          <ion-label>
+            <ion-icon color="medium" slot="end" name="lock"></ion-icon>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox mode="ios"></ion-checkbox>
+          <ion-text class="agree-terms">
+            Eu concordo com os <a href="#">termos</a>
+          </ion-text>
+        </ion-item>
+
+
+        <div class="radio-group">
+          <ion-item lines="none">
+            <ion-list>
+              <ion-radio-group name="codigoEmpresa" [(ngModel)]="companyCode">
+                <ion-list-header>Possui Código de Empresa?</ion-list-header>
+                <div class="side-by-side">
+                  <ion-item lines="none">
+                    <ion-radio value="s"></ion-radio>
+                    <ion-label>Sim</ion-label>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-radio value="n"></ion-radio>
+                    <ion-label>Não</ion-label>
+                  </ion-item>
+                </div>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+        </div>
+        <!--- Se tiver código de empresa, mostra esse grupo-->
+        <ion-item-group class="check-code animate-if">
+          <ion-item>
+            <ion-input type="text" placeholder="Digite seu código aqui"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-button class="default__button" expand="block" (click)="connect()">
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              Conectar
+            </ion-button>
+          </ion-item>
+        </ion-item-group>
+        <!----------------------------------------------------->
+
+        <!---Sem código, mostra esse grupo-->
+        <ion-item-group class="check-code" ng-checked="no">
+          <ion-item lines="none">
+            <ion-text color="medium">
+              Não Possui um Código?
+            </ion-text>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-button class="default__button" expand="block">
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              Criar Nova Empresa
+            </ion-button>
+          </ion-item>
+        </ion-item-group>
+        <!------------------------->
+        <ion-button (click)="register()">
+          Registrar
+        </ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>&copy; 2019 - Easy Ficha</ion-title>
+  </ion-toolbar>
+</ion-footer>

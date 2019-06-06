@@ -1,5 +1,7 @@
 {
   "name": "easyficha",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

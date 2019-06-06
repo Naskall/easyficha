@@ -1,0 +1,57 @@
+.margin__icon {
+    margin-right: 25px;
+
+}
+
+.p-sub__cards {
+    font-size: 13px;
+    color: #fff;
+    margin-left: 11px;
+}
+
+.client__ion-item {
+    --background: #239DEF;
+    --color: #fff
+}
+
+.adjusts__ion-item {
+
+    --background: rgb(121, 130, 133);
+    --color: #fff
+}
+
+.records__ion-item {
+    --background: #00BD9B;
+    --color: #fff
+}
+
+.left-icon__base {
+
+    width: 60px;
+
+    &:ion-icon {
+        font-size: 164px;
+    }
+
+}
+
+.left-icon__client {
+    @extend .left-icon__base;
+    background-color: --ion-color-dark-client;
+}
+
+.left-icon__records {
+    @extend .left-icon__base;
+    background-color: --ion-color-dark-records;
+}
+
+.left-icon__adjusts {
+    @extend .left-icon__base;
+    background-color: --ion-color-dark-adjusts;
+}
+
+.statistic__card {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
