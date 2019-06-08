@@ -1,28 +1,35 @@
-import chartJs from "chart.js";
 import { Component, OnInit, ViewChild } from "@angular/core";
+import Chart from "chart.js";
+import { CONTEXT } from "@angular/core/src/render3/interfaces/view";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"]
 })
-export class HomePage implements OnInit {
-  @ViewChild("barMonthlyCanvas") barMonthlyCanvas: { nativeElement: any };
-  @ViewChild("barWeacklyCanvas") barWeacklyCanvas: { nativeElement: any };
-  @ViewChild("perYearlineCanvas") perYearlineCanvas: { nativeElement: any };
+export class HomePage {
+  /*Id do canvas no html */
+  @ViewChild("barMonthlyCanvas") barMonthlyCanvas;
+  @ViewChild("barWeacklyCanvas") barWeacklyCanvas;
+  @ViewChild("lineYearCanvas") lineYearCanvas;
+
+  barMonthlyChart: any;
+  barWeacklyChart: any;
+  lineYearChart: any;
 
   constructor() {}
 
-  ngOnInit() {
+  /*Depois que iniciar a view é jogado para a variavel BarChart no método getBarChart*/
+  ngAfterViewInit() {
     setTimeout(() => {
-      this.barMonthlyCanvas.nativeElement = this.getMonthlyBarChart();
-      this.barWeacklyCanvas.nativeElement = this.getWeacklyBarChart();
-      this.perYearlineCanvas.nativeElement = this.getPerYearLineChart();
+      this.barMonthlyChart = this.getMonthlyBarChart();
+      this.barWeacklyChart = this.getWeacklyBarChart();
+      this.lineYearChart = this.getYearLineChart();
     }, 150);
   }
 
-  getChart(context, chartType, data, options?) {
-    return new chartJs(context, {
+  getChart(CONTEXT, chartType, data, options?) {
+    return new Chart(CONTEXT, {
       data,
       options,
       type: chartType
@@ -31,75 +38,54 @@ export class HomePage implements OnInit {
 
   getMonthlyBarChart() {
     const data = {
-      labels: ["1", "2", "3", "4", "5", "6", "7"],
+      labels: ["Red", "Green", "Blue"],
       datasets: [
         {
-          label: "Em atraso",
-          data: [23],
-          backgroundColor: [" #f00"],
-          borderWidth: 1
-        },
-        {
-          label: "A receber",
-          data: [11],
-          backgroundColor: ["#ff0"],
-          borderWidth: 1
-        },
-        {
-          label: "Geral",
-          data: [13],
-          backgroundColor: ["#0f0"],
+          label: "# of Votes",
+          data: [13, 44, 23],
+          backgroundColor: ["#f00", "#0f0", "#00f"],
           borderWidth: 1
         }
       ]
     };
     const options = {
-      animation: {
-        duration: 1.5
-      },
       scales: {
         yAxes: [
           {
-            ticks: { beginAtZero: true }
+            ticks: {
+              beginAtZero: true
+            }
           }
         ]
       }
     };
-    return this.getChart(this.barMonthlyCanvas, "bar", data, options);
+    return this.getChart(
+      this.barMonthlyCanvas.nativeElement,
+      "bar",
+      data,
+      options
+    );
   }
 
   getWeacklyBarChart() {
     const data = {
-      labels: ["Semana"],
+      labels: ["1", "2", "3"],
       datasets: [
         {
-          label: "Em atraso",
-          data: [23],
-          backgroundColor: [" #f00"],
-          borderWidth: 1
-        },
-        {
-          label: "A receber",
-          data: [11],
-          backgroundColor: ["#ff0"],
-          borderWidth: 1
-        },
-        {
-          label: "Geral",
-          data: [13],
-          backgroundColor: ["#0f0"],
+          label: "Label 1",
+          data: [11, 54, 12],
+          backgroundColor: ["#3f4ed3", "#cccccc", "#4f1245"],
           borderWidth: 1
         }
       ]
     };
     const options = {
-      animation: {
-        duration: 1.5
-      },
       scales: {
         yAxes: [
           {
-            ticks: { beginAtZero: true }
+            ticks: {
+              beginAtZero: true
+            }
           }
         ]
       }
@@ -111,65 +97,24 @@ export class HomePage implements OnInit {
       options
     );
   }
-
-  getPerYearLineChart() {
+  getYearLineChart() {
     const data = {
-      labels: ["2019"],
+      labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
       datasets: [
         {
-          label: "Janeiro",
+          label: "Junho",
           fill: false,
           lineTension: 0.1,
-          backgroundColor: "#A195D1",
-          borderCOlor: "#000",
+          backgroundColor: "#3f4ed3",
           borderCapStyle: "butt",
           borderJoinStyle: "miter",
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [40],
-          scanGaps: false
-        },
-        {
-          label: "Fevereiro",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: "#A195D1",
-          borderCOlor: "#000",
-          borderCapStyle: "butt",
-          borderJoinStyle: "miter",
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [21, 33, 99],
-          scanGaps: false
-        },
-        {
-          label: "Março",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: "#A195D1",
-          borderCOlor: "#000",
-          borderCapStyle: "butt",
-          borderJoinStyle: "miter",
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [33],
-          scanGaps: false
-        },
-        {
-          label: "Abril",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: "#A195D1",
-          borderCOlor: "#000",
-          borderCapStyle: "butt",
-          borderJoinStyle: "miter",
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [99],
+          data: [3000, 4444, 12313, 343, 1231, 62461, 5856, 3433],
           scanGaps: false
         }
       ]
     };
-    return this.getChart(this.perYearlineCanvas, "line", data);
+    return this.getChart(this.lineYearCanvas.nativeElement, "line", data);
   }
 }
