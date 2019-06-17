@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-fichas",
-  templateUrl: "./fichas.page.html",
-  styleUrls: ["./fichas.page.scss"]
+  selector: "app-record-register",
+  templateUrl: "./record-register.page.html",
+  styleUrls: ["./record-register.page.scss"]
 })
 export class RecordRegisterPage implements OnInit {
   constructor() {}

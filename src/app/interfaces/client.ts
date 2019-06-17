@@ -1,3 +1,5 @@
+//Esta interface equivale à tabela num DB relacional
+
 export interface Client {
   id?: string; //Código do cliente;
   fullName?: string; //Nome completo do cliente

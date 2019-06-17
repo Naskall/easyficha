@@ -12,9 +12,7 @@ import { map } from "rxjs/operators";
 })
 export class ClientService {
   private clientsCollection: AngularFirestoreCollection<Client>;
-  private client: Client = {};
-  private loading: any;
-  authService: any;
+
   constructor(private afs: AngularFirestore) {
     this.clientsCollection = this.afs.collection<Client>("Clients");
   }
@@ -28,17 +26,18 @@ export class ClientService {
           return { id, ...data };
         });
       })
-    ); //Usa o snapshotChances por ter que pegar o ID do documento
+    ); //Usa o snapshotChanges por ter que pegar o ID do documento
   }
   addClient(client: Client) {
     return this.clientsCollection.add(client);
   }
-  updateClient(id: string, client: Client) {
-    return this.clientsCollection.doc<Client>(id).update(client);
-  }
   getClient(id: string) {
     return this.clientsCollection.doc<Client>(id).valueChanges();
   }
+  updateClient(id: string, client: Client) {
+    return this.clientsCollection.doc<Client>(id).update(client);
+  }
+
   deleteClient(id: string) {
     return this.clientsCollection.doc(id).delete();
   }

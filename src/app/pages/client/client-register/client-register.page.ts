@@ -11,7 +11,7 @@ import { Component, OnInit } from "@angular/core";
 import { Client } from "src/app/interfaces/client";
 
 @Component({
-  selector: "app-clients",
+  selector: "app-client-register",
   templateUrl: "./client-register.page.html",
   styleUrls: ["./client-register.page.scss"]
 })

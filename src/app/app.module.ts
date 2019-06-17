@@ -12,7 +12,6 @@ import { AngularFireModule } from "@angular/fire";
 import { environment } from "src/environments/environment";
 import { AngularFireAuthModule } from "@Angular/fire/auth";
 import { AngularFirestoreModule } from "@Angular/fire/firestore";
-import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],

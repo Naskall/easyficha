@@ -1,11 +1,9 @@
 import { AuthService } from "./../../../services/auth.service";
+import { Component, OnInit, Input } from "@angular/core";
 import { ClientService } from "./../../../services/client.service";
 import { ToastController, LoadingController } from "@ionic/angular";
-import { Component, OnInit, Input } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { Subscription } from "rxjs";
 import { Client } from "src/app/interfaces/client";
-import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-clients-list",
@@ -14,41 +12,41 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ClientsListPage implements OnInit {
   private loading: any;
-  private clientId: string = null;
-  private client: Client = {};
+  public client = new Array<Client>();
   private clientSubscription: Subscription;
 
   constructor(
     private toastCtrl: ToastController,
+    private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private clientService: ClientService,
-    private activeRoute: ActivatedRoute,
-    private authService: AuthService
+    private clientService: ClientService
   ) {
-    this.clientId = this.activeRoute.snapshot.params["id"];
-    if (this.clientId) this.loadClient();
-  }
-
-  ngOnInit() {}
-
-  loadClient() {
     this.clientSubscription = this.clientService
-      .getClient(this.clientId)
+      .getClients()
       .subscribe(data => {
         this.client = data;
       });
   }
-  //https://jsonplaceholder.typicode.com/users
+  ngOnDestroy() {
+    this.clientSubscription.unsubscribe();
+  }
+  ngOnInit() {
+    console.log(this.client);
+  }
 
-  // getClients() {
-  //   return this.clientsCollection.snapshotChanges().pipe(
-  //     map(actions => {
-  //       return actions.map(a => {
-  //         const data = a.payload.doc.data();
-  //         const id = a.payload.doc.id;
-  //         return { id, ...data };
-  //       });
-  //     })
-  //   ); //Usa o snapshotChances por ter que pegar o ID do documento
-  // }
+  async deleteClient(id: string) {
+    try {
+      await this.clientService.deleteClient(id);
+    } catch (error) {
+      this.presentToast("Erro ao tentar apagar esta pessoa");
+    }
+  }
+  async presentLoading() {
+    this.loading = await this.loadingCtrl.create({ message: "Carregando..." });
+    return this.loading.present();
+  }
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
+  }
 }
