@@ -14,6 +14,27 @@ const routes: Routes = [
     path: "login",
     loadChildren: "./pages/login/login.module#LoginPageModule",
     canActivate: [LoginGuard]
+  },
+  {
+    path: "client-register",
+    loadChildren:
+      "./pages/client/client-register/client-register.module#ClientRegisterPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "client-details/:id",
+    loadChildren:
+      "./pages/client/client-details/client-details.module#ClientDetailsPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "record-register",
+    loadChildren: "./pages/record/record-register.module#RecordRegisterModule"
+  },
+  {
+    path: "clients-list",
+    loadChildren:
+      "./pages/client/clients-list/clients-list.module#ClientsListPageModule"
   }
 ];
 

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar mode="md" color="dark">
+    <ion-icon slot="start" size="large" name="menu"></ion-icon>
+    <ion-title>DS Develop</ion-title>
+
+    <ion-icon class="margin__icon" slot="end" size="large" name="search"></ion-icon>
+    <ion-icon class="margin__icon" slot="end" size="large" name="notifications">
+
+    </ion-icon>
+    <ion-icon class="margin__icon" slot="end" size="large" name="bookmarks"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Cadastro de Fichas</ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Cliente</ion-label>
+        <ion-input type="text" readonly="true" autocomplete required clearInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Código da Ficha</ion-label>
+        <ion-input type="number" maxlength="11" required clearInput></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">
+          Data da Venda
+        </ion-label>
+        <ion-input type="date" required clearInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Valor da Venda</ion-label>
+        <ion-input type="number" required clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Prazo máximo de pagamento</ion-label>
+        <ion-input type="number" placeholder="10 Dias" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Descrição da Venda</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+      <div class="center-save__button">
+        <ion-button (click)="onClick()">
+          <ion-icon slot="end" name="save"></ion-icon>
+          Salvar
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -3,40 +3,52 @@
     <ion-icon slot="start" size="large" name="menu"></ion-icon>
     <ion-title>DS Develop</ion-title>
 
-    <ion-icon class="margin__icon" slot="end" size="large" name="search"></ion-icon>
-    <ion-icon class="margin__icon" slot="end" size="large" name="notifications">
+    <ion-icon slot="end" size="large" name="notifications"></ion-icon>
 
+    <ion-icon slot="end" size="large" (click)="logout()" name="exit">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
     </ion-icon>
-    <ion-icon class="margin__icon" slot="end" size="large" name="bookmarks"></ion-icon>
+
   </ion-toolbar>
 </ion-header>
+<!--- 
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button class="in-item__fab" router-direction href="/clients">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button class="in-item__fab" router-direction href="/fichas">
+      <ion-icon name="clipboard"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab> -->
 
 <ion-content>
   <ion-toolbar>
-    <ion-title>Acesso Rápido</ion-title>
+    <ion-searchbar placeholder="Buscar cliente ou ficha"></ion-searchbar>
   </ion-toolbar>
 
-  <ion-card>
+  <ion-card href="/clients-list">
     <ion-item lines="none" class="client__ion-item">
       <div class="left-icon__client">
         <ion-icon name="person" size="large" slot="start"></ion-icon>
       </div>
       <ion-label>CLIENTES
-        <p class="p-sub__cards">LISTA DE CLIENTES</p>
-
+        <p class="p-sub__cards">Relação de clientes cadastrados</p>
       </ion-label>
     </ion-item>
   </ion-card>
 
-
-
-  <ion-card>
+  <ion-card href="/fichas-list">
     <ion-item lines="none" class="records__ion-item">
       <div class="left-icon__records">
         <ion-icon name="clipboard" size="large" slot="start"></ion-icon>
       </div>
       <ion-label>FICHAS
-        <p class="p-sub__cards">LISTA DE FICHAS</p>
+        <p class="p-sub__cards">Relação de Fichas</p>
 
       </ion-label>
     </ion-item>
@@ -48,7 +60,7 @@
         <ion-icon name="cog" size="large" slot="start"></ion-icon>
       </div>
       <ion-label>AJUSTES
-        <p class="p-sub__cards">ACESSO AOS AJUSTES</p>
+        <p class="p-sub__cards">Abre as configurações</p>
       </ion-label>
     </ion-item>
   </ion-card>
@@ -56,7 +68,7 @@
 
   <ion-card>
     <ion-card-header class="statistic__card">
-      <ion-title>R$7.000,77</ion-title>
+      <ion-card-subtitle>R$7.000,77</ion-card-subtitle>
       <ion-card-subtitle>A receber / Semana</ion-card-subtitle>
     </ion-card-header>
 
@@ -67,7 +79,7 @@
 
   <ion-card>
     <ion-card-header class="statistic__card">
-      <ion-card-title>R$3.600,45</ion-card-title>
+      <ion-card-subtitle>R$3.600,45</ion-card-subtitle>
       <ion-card-subtitle>Pendente / Mês</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
@@ -77,7 +89,7 @@
 
   <ion-card>
     <ion-card-header class="statistic__card">
-      <ion-card-title>Controle Financeiro</ion-card-title>
+      <ion-card-subtitle>Controle Financeiro</ion-card-subtitle>
       <ion-card-subtitle>Mensal</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>

@@ -26,7 +26,11 @@
 }
 
 .check-code {
-    display: none;
+    visibility: hidden;
+}
+
+.check-code:checked {
+    visibility: visible;
 }
 
 .side-by-side {

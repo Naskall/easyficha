@@ -1,3 +1,7 @@
+body {
+    background-color: #F4F7FA;
+}
+
 .margin__icon {
     margin-right: 25px;
 
@@ -52,7 +56,7 @@
 
 .statistic__card {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
 }
 
@@ -62,4 +66,8 @@
     width: 25px;
     position: relative;
     right: 0px;
+}
+
+.in-item__fab {
+    --color: #09B
 }

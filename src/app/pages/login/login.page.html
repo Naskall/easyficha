@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="swiper-no-swiping">
-  <ion-segment (ionChange)="segmentChanged($event)" style="margin-top: 20px;">
+  <ion-segment (ionChange)="segmentChanged($event)" style="margin-top: 20px;" mode="md">
     <ion-segment-button checked value="login">
       <ion-label>Login</ion-label>
     </ion-segment-button>
@@ -94,7 +94,7 @@
         <div class="radio-group">
           <ion-item lines="none">
             <ion-list>
-              <ion-radio-group name="codigoEmpresa" [(ngModel)]="companyCode">
+              <ion-radio-group mode="md" id="codigoEmpresa" [(ngModel)]="companyCode">
                 <ion-list-header>Possui Código de Empresa?</ion-list-header>
                 <div class="side-by-side">
                   <ion-item lines="none">

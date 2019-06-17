@@ -1,3 +1,5 @@
+// Verificar push mesmo com o app fechado
+
 import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonSlides, ToastController, LoadingController } from "@ionic/angular";

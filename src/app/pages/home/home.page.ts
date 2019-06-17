@@ -1,3 +1,4 @@
+import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import Chart from "chart.js";
 import { CONTEXT } from "@angular/core/src/render3/interfaces/view";
@@ -16,8 +17,9 @@ export class HomePage {
   barMonthlyChart: any;
   barWeacklyChart: any;
   lineYearChart: any;
+  AuthService: any;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   /*Depois que iniciar a view é jogado para a variavel BarChart no método getBarChart*/
   ngAfterViewInit() {
@@ -116,5 +118,13 @@ export class HomePage {
       ]
     };
     return this.getChart(this.lineYearCanvas.nativeElement, "line", data);
+  }
+
+  async logout() {
+    try {
+      await this.authService.logout();
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
