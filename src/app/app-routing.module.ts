@@ -29,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: "record-register",
-    loadChildren: "./pages/record/record-register.module#RecordRegisterModule"
+    loadChildren:
+      "./pages/record/record-register.module#RecordRegisterPageModule"
   },
   {
     path: "clients-list",

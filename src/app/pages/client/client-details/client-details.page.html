@@ -1,9 +1,61 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>client-details</ion-title>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/clients-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>DS Develop</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card-title>{{client.name}}</ion-card-title>
+      <ion-card-subtitle>
+        {{client.address}}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>CPF:</ion-label>
+        <ion-text color="dark">
+          {{client.cpf}}
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Telefone: </ion-label>
+        <ion-text color="dark">{{client.phone}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Limite Total:</ion-label>
+        <ion-text color="dark">
+          R${{client.maxValue}}
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Limite Restante:</ion-label>
+        <ion-text color="dark">
+          R$3000,00
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Notificar por:</ion-label>
+        <ion-text color="dark">
+          {{client.pushType}}
+        </ion-text>
+      </ion-item>
+    </ion-card-content>
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button class="center-save__button" slot [routerDirection]="['/client-register', client.id]">
+          Atualizar Registro
+          <ion-icon slot="end" name="create"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-card>
 </ion-content>

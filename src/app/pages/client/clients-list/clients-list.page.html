@@ -9,14 +9,19 @@
 </ion-header>
 
 <ion-content>
+  <ion-toolbar>
+    <ion-searchbar showCancelButton (ion-input)='filterList($e)' placeholder="Buscar cliente ou ficha">
+    </ion-searchbar>
+
+  </ion-toolbar>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button router-direction href="/client-register">
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list *ngIf="!client.length">
-    <ion-item *ngFor="let item of [0, 1, 2,3,5,6,7]">
+  <ion-list *ngIf="!clients.length">
+    <ion-item *ngFor="let item of [0,1,2,3,5,6,7]">
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-avatar>
@@ -36,21 +41,21 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let client of clients">
-      <ion-item button [routerLink]="['/home', client.id]">
+      <ion-item button [routerLink]="['/client-details', client.id]">
 
         <ion-label>
           {{ client.name }}
-          <p>{{ client.cpf }}</p>
-          <p>{{ client.createdAt | date: 'short' }}</p>
+          <p>CPF: {{ client.cpf }}</p>
+          <p>Contato: {{client.phone}}</p>
+          <!-- <p>Registrado em: {{ client.createdAt | date: 'short' }}</p> -->
         </ion-label>
 
-        <ion-note color="primary" slot="end" *ngIf="client.phone">{{ client.phone }}</ion-note>
+        <!-- <ion-note color="primary" slot="end" *ngIf="client.phone">{{ client.phone }}</ion-note> -->
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteClient(client.id)">
-          <ion-icon slot="top" name="trash"></ion-icon>
-          Excluir
+        <ion-item-option color="danger" (click)="deleteAlertConfirm(client.id)">
+          <ion-icon slot="top" size="large" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

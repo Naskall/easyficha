@@ -15,39 +15,39 @@
       <ion-card-subtitle color="danger">Todos os campos são obrigatórios</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">Nome Completo</ion-label>
         <ion-input type="text" [(ngModel)]="client.name" required clearInput></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">CPF</ion-label>
         <ion-input type="number" [(ngModel)]="client.cpf" maxlength="11" required clearInput></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">
           Endereço
         </ion-label>
         <ion-input type="text" [(ngModel)]="client.address" required clearInput></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">Telefone
         </ion-label>
         <ion-input type="number" [(ngModel)]="client.phone" inputmode="tel" required clearInput></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">Valor Limite</ion-label>
         <ion-input type="number" [(ngModel)]="client.maxValue" required clearInput></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="client">
         <ion-label position="floating">Avisar a cada</ion-label>
         <ion-input type="number" [(ngModel)]="client.notification" placeholder="10 Dias" required></ion-input>
       </ion-item>
 
-      <ion-item lines="none">
+      <ion-item lines="none" *ngIf="client">
         <ion-label>Notificar por</ion-label>
         <ion-select multiple="false" [(ngModel)]="client.pushType" placeholder="Selecione...">
           <ion-select-option value="mail">E-mail</ion-select-option>

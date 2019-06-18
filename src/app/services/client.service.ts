@@ -1,4 +1,3 @@
-import { AuthService } from "./auth.service";
 import {
   AngularFirestore,
   AngularFirestoreCollection

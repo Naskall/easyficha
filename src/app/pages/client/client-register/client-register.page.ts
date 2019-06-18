@@ -30,18 +30,27 @@ export class ClientRegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+
   async saveClient() {
     await this.presentLoading();
     this.client.userId = this.authService.getAuth().currentUser.uid;
 
     if (this.clientId) {
-      await this.clientService.updateClient(this.clientId, this.client);
-      await this.loading.dismiss();
-      this.navCtrl.navigateBack("/client-list");
+      try {
+        await this.clientService.updateClient(this.clientId, this.client);
+        await this.loading.dismiss();
+        this.navCtrl.navigateBack("/clients-list");
+        this.presentToast("Pronto, cliente atualizado!");
+      } catch (error) {
+        this.presentToast("Erro ao tentar atualizar dados");
+      }
     } else {
       this.client.createdAt = new Date().getTime();
       try {
         await this.clientService.addClient(this.client);
+        await this.loading.dismiss();
+        this.navCtrl.navigateBack("/clients-list");
+        this.presentToast("Pronto, novo cliente registrado!");
       } catch (error) {
         this.presentToast("Erro ao tentar salvar");
         this.loading.dismiss();

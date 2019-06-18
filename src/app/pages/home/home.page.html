@@ -28,7 +28,14 @@
 
 <ion-content>
   <ion-toolbar>
-    <ion-searchbar placeholder="Buscar cliente ou ficha"></ion-searchbar>
+    <ion-searchbar showCancelButton (ion-input)='filterList($e)' placeholder="Buscar cliente ou ficha">
+    </ion-searchbar>
+    <!-- <ion-list>
+      <ion-item *ngFor="let client of clients">
+        <ion-label>{{client.name}}</ion-label>
+        <ion-label>{{client.phone }}</ion-label>
+      </ion-item>
+    </ion-list>--->
   </ion-toolbar>
 
   <ion-card href="/clients-list">

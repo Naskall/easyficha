@@ -1,3 +1,4 @@
+import { AngularFirestore } from "@Angular/fire/firestore";
 import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import Chart from "chart.js";
@@ -9,6 +10,10 @@ import { CONTEXT } from "@angular/core/src/render3/interfaces/view";
   styleUrls: ["./home.page.scss"]
 })
 export class HomePage {
+  public clients: any[];
+  public records: any[];
+  public loadadedClientList: any[];
+  public loadadedRecodsList: any[];
   /*Id do canvas no html */
   @ViewChild("barMonthlyCanvas") barMonthlyCanvas;
   @ViewChild("barWeacklyCanvas") barWeacklyCanvas;
@@ -19,8 +24,41 @@ export class HomePage {
   lineYearChart: any;
   AuthService: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private fireStore: AngularFirestore
+  ) {}
+  ngOnInit() {
+    this.fireStore
+      .collection("Clients")
+      .valueChanges()
+      .subscribe(clients => {
+        this.clients = clients;
+        this.loadadedClientList = clients;
+      });
+  }
+  initializeItems(): void {
+    this.clients = this.loadadedClientList;
+  }
+  filterList(e) {
+    this.initializeItems();
 
+    const searchTerm = e.srcElement.value;
+    if (!searchTerm) {
+      return;
+    }
+    this.clients = this.clients.filter(currentClient => {
+      if (currentClient.name && searchTerm) {
+        if (
+          currentClient.name.toLowerCase().indexOf(searchTerm.toLowerCase()) >
+          -1
+        ) {
+          return true;
+        }
+        return false;
+      }
+    });
+  }
   /*Depois que iniciar a view é jogado para a variavel BarChart no método getBarChart*/
   ngAfterViewInit() {
     setTimeout(() => {
