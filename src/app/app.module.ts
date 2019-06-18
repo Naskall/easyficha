@@ -1,3 +1,4 @@
+import { PipesModule } from "./pipes/pipes.module";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
@@ -12,6 +13,7 @@ import { AngularFireModule } from "@angular/fire";
 import { environment } from "src/environments/environment";
 import { AngularFireAuthModule } from "@Angular/fire/auth";
 import { AngularFirestoreModule } from "@Angular/fire/firestore";
+import { BrMaskerModule } from "br-mask";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,9 @@ import { AngularFirestoreModule } from "@Angular/fire/firestore";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    PipesModule,
+    BrMaskerModule
   ],
   providers: [
     StatusBar,

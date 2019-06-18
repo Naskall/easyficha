@@ -11,9 +11,12 @@ import { map } from "rxjs/operators";
 })
 export class ClientService {
   private clientsCollection: AngularFirestoreCollection<Client>;
+  private isItemAvailable: boolean;
+  items: any;
 
   constructor(private afs: AngularFirestore) {
     this.clientsCollection = this.afs.collection<Client>("Clients");
+    this.isItemAvailable = false;
   }
 
   getClients() {

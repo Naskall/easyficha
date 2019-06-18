@@ -5,15 +5,15 @@
     </ion-buttons>
     <ion-title>DS Develop</ion-title>
   </ion-toolbar>
-
+  <ion-toolbar>
+    <ion-searchbar showCancelButton animated (ionChange)='filterClients($event)' debounce="500"
+      placeholder="Buscar cliente">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-toolbar>
-    <ion-searchbar showCancelButton (ion-input)='filterList($e)' placeholder="Buscar cliente ou ficha">
-    </ion-searchbar>
 
-  </ion-toolbar>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button router-direction href="/client-register">
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
@@ -38,9 +38,10 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
   <ion-list>
-    <ion-item-sliding *ngFor="let client of clients">
+
+
+    <ion-item-sliding *ngFor="let client of clients | filtro:searchText">
       <ion-item button [routerLink]="['/client-details', client.id]">
 
         <ion-label>

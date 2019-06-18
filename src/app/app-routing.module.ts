@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: "record-register",
     loadChildren:
-      "./pages/record/record-register.module#RecordRegisterPageModule"
+      "./pages/record/record-register/record-register.module#RecordRegisterPageModule"
   },
   {
     path: "clients-list",

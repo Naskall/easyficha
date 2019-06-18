@@ -18,8 +18,8 @@ import { Client } from "src/app/interfaces/client";
 export class ClientsListPage implements OnInit {
   private loading: any;
   public clients = new Array<Client>();
+  public searchText: string = "";
   private clientId: string = null;
-
   private clientSubscription: Subscription;
 
   constructor(
@@ -35,20 +35,11 @@ export class ClientsListPage implements OnInit {
       .subscribe(data => {
         this.clients = data;
       });
-    // this.clientId = this.activatedRoute.snapshot.params["id"];
-    // if (this.clientId) this.lkoadClient();
   }
   ngOnDestroy() {
     if (this.clientSubscription) this.clientSubscription.unsubscribe();
   }
   ngOnInit() {}
-  // loadClient() {
-  //   this.clientSubscription = this.clientService
-  //     .getClient(this.clientId)
-  //     .subscribe(data => {
-  //       this.client = data;
-  //     });
-  // }
 
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({ message: "Carregando..." });
@@ -57,6 +48,10 @@ export class ClientsListPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
+  }
+  filterClients(event) {
+    const text = event.target.value;
+    this.searchText = text;
   }
   async deleteAlertConfirm(id: string) {
     const alert = await this.alertCtrl.create({
