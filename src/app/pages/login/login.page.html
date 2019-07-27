@@ -90,19 +90,21 @@
           </ion-text>
         </ion-item>
 
-
+        <!-- Radio group das opções de código da empresa -->
         <div class="radio-group">
           <ion-item lines="none">
             <ion-list>
-              <ion-radio-group mode="md" id="codigoEmpresa" [(ngModel)]="companyCode">
+              <ion-radio-group mode="md" [(ngModel)]="companyCode">
                 <ion-list-header>Possui Código de Empresa?</ion-list-header>
                 <div class="side-by-side">
                   <ion-item lines="none">
-                    <ion-radio value="s"></ion-radio>
+                    <ion-radio id="companyCodeYes" name="companyCodeYes" (ionChange)="radioEventHandler($event)"
+                      value="s"></ion-radio>
                     <ion-label>Sim</ion-label>
                   </ion-item>
                   <ion-item lines="none">
-                    <ion-radio value="n"></ion-radio>
+                    <ion-radio id="NoCompanyCode" name="noCompanyCode" (ionChange)="radioEventHandler($event)"
+                      value="n"></ion-radio>
                     <ion-label>Não</ion-label>
                   </ion-item>
                 </div>
@@ -110,8 +112,9 @@
             </ion-list>
           </ion-item>
         </div>
+
         <!--- Se tiver código de empresa, mostra esse grupo-->
-        <ion-item-group class="check-code animate-if">
+        <ion-item-group id="haveCode" [hidden]="isHidden" class="animate-if">
           <ion-item>
             <ion-input type="text" placeholder="Digite seu código aqui"></ion-input>
           </ion-item>
@@ -126,7 +129,8 @@
         <!----------------------------------------------------->
 
         <!---Sem código, mostra esse grupo-->
-        <ion-item-group class="check-code" ng-checked="no">
+
+        <ion-item-group id="noCode" [hidden]="isHidden" class="animate-if">
           <ion-item lines="none">
             <ion-text color="medium">
               Não Possui um Código?
@@ -140,7 +144,9 @@
             </ion-button>
           </ion-item>
         </ion-item-group>
+
         <!------------------------->
+
         <ion-button (click)="register()">
           Registrar
         </ion-button>

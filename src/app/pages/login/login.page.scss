@@ -25,13 +25,11 @@
 
 }
 
-.check-code {
-    visibility: hidden;
+
+.hide-field {
+    display: none;
 }
 
-.check-code:checked {
-    visibility: visible;
-}
 
 .side-by-side {
     display: flex;
@@ -54,8 +52,7 @@ slide-inner {
 }
 
 .animate-if {
-    background: white;
-    border: 1px solid black;
+
     padding: 10px;
 }
 

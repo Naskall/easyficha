@@ -16,6 +16,12 @@ const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
+    path: "client-register/:id",
+    loadChildren:
+      "./pages/client/client-register/client-register.module#ClientRegisterPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
     path: "client-register",
     loadChildren:
       "./pages/client/client-register/client-register.module#ClientRegisterPageModule",
@@ -28,14 +34,34 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "record-register",
+    path: "record-register/:id",
     loadChildren:
-      "./pages/record/record-register/record-register.module#RecordRegisterPageModule"
+      "./pages/record/record-register/record-register.module#RecordRegisterPageModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "clients-list",
     loadChildren:
-      "./pages/client/clients-list/clients-list.module#ClientsListPageModule"
+      "./pages/client/clients-list/clients-list.module#ClientsListPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "record-list",
+    loadChildren:
+      "./pages/record/record-list/record-list.module#RecordListPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "record-details",
+    loadChildren:
+      "./pages/record/record-details/record-details.module#RecordDetailsPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "record-details/:id",
+    loadChildren:
+      "./pages/record/record-details/record-details.module#RecordDetailsPageModule",
+    canActivate: [AuthGuard]
   }
 ];
 

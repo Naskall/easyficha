@@ -1,7 +1,7 @@
 import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "./../../../services/auth.service";
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { ClientService } from "./../../../services/client.service";
+import { RecordService } from "./../../../services/record.service";
 import {
   ToastController,
   LoadingController,
@@ -10,26 +10,27 @@ import {
   ActionSheetController
 } from "@ionic/angular";
 import { Subscription } from "rxjs";
-import { Client } from "src/app/interfaces/client";
+import { CustomerRecord } from "src/app/interfaces/record";
 
 @Component({
-  selector: "app-clients-list",
-  templateUrl: "./clients-list.page.html",
-  styleUrls: ["./clients-list.page.scss"]
+  selector: "app-record-list",
+  templateUrl: "./record-list.page.html",
+  styleUrls: ["./record-list.page.scss"]
 })
-export class ClientsListPage implements OnInit {
+export class RecordListPage implements OnInit {
   private loading: any;
-  public clients = new Array<Client>();
+  public records = new Array<CustomerRecord>();
   public searchText: string = "";
-  private clientId: string = null;
-  private clientSubscription: Subscription;
+  private recordId: string = null;
+  private recordSubscription: Subscription;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
   constructor(
     private toastCtrl: ToastController,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private clientService: ClientService,
+    private recordService: RecordService,
     public alertCtrl: AlertController,
     private actionSheetCtrl: ActionSheetController
   ) {
@@ -37,25 +38,25 @@ export class ClientsListPage implements OnInit {
   }
   loadData(event) {
     setTimeout(() => {
-      this.getClients();
+      this.getRecords();
       event.target.complete();
       console.log("Done");
-      if (this.clients.length == 10) {
+      if (this.records.length == 10) {
         event.target.disabled = true;
       }
     }, 1500);
   }
 
   ngOnDestroy() {
-    if (this.clientSubscription) this.clientSubscription.unsubscribe();
+    if (this.recordSubscription) this.recordSubscription.unsubscribe();
   }
   ngOnInit() {}
 
-  getClients() {
-    this.clientSubscription = this.clientService
-      .getClients()
+  getRecords() {
+    this.recordSubscription = this.recordService
+      .getRecords()
       .subscribe(data => {
-        this.clients = data;
+        this.records = data;
       });
   }
   async presentLoading() {
@@ -108,7 +109,7 @@ export class ClientsListPage implements OnInit {
           text: "Sim",
           handler: () => {
             try {
-              this.clientService.deleteClient(id);
+              this.recordService.deleteRecord(id);
             } catch (error) {
               this.presentToast("Erro ao tentar apagar esta pessoa");
             }

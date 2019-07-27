@@ -2,7 +2,12 @@
 
 import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonSlides, ToastController, LoadingController } from "@ionic/angular";
+import {
+  IonSlides,
+  ToastController,
+  LoadingController,
+  IonRadioGroup
+} from "@ionic/angular";
 import { User } from "src/app/interfaces/user";
 
 @Component({
@@ -12,10 +17,11 @@ import { User } from "src/app/interfaces/user";
 })
 export class LoginPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
-
+  @ViewChild(IonRadioGroup) radios: IonRadioGroup;
   public userLogin: User = {};
   public userRegister: User = {};
   private loading: any;
+  public isHidden: boolean;
 
   constructor(
     private loadingController: LoadingController,
@@ -25,6 +31,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  radioChangeHandler(event: any) {
+    //this.
+  }
   segmentChanged(event: any) {
     if (event.detail.value === "login") {
       this.slides.slidePrev();

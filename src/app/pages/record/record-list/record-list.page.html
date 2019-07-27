@@ -13,8 +13,7 @@
 
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar mode="ios" showCancelButton animated (ionChange)='filterClients($event)'
-      placeholder="Buscar Cliente">
+    <ion-searchbar mode="ios" showCancelButton animated (ionChange)='filterClients($event)' placeholder="Buscar Ficha">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -27,7 +26,7 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list *ngIf="!clients.length">
+  <ion-list *ngIf="!records.length">
     <ion-item *ngFor="let item of [0,1,2,3]">
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
@@ -48,42 +47,23 @@
   <ion-list>
 
 
-    <ion-item-sliding *ngFor="let client of clients | filtro:searchText:'fullName'">
-      <ion-item button [routerLink]="['/client-details', client.id]" routerDirection="forward">
+    <ion-item-sliding *ngFor="let record of records">
+      <ion-item button [routerLink]="['/record-details', record.id]" routerDirection="forward">
 
         <ion-label>
-          {{ client.fullName }}
-          <p>CPF: {{ client.cpf }}</p>
+          <p>Código: {{ record.recordCode }}</p>
+          <p>Valor: R${{record.recordValue}}</p>
 
-          <p>Contato: {{client.phone}}</p>
-          <p>Notificado por:
-            <ion-text color="dark" *ngIf="client.pushType=='both'">
-              Celular/E-mail
-            </ion-text>
-            <ion-text color="dark" *ngIf="client.pushType=='push'">
-              Celular
-            </ion-text>
-            <ion-text color="dark" *ngIf="client.pushType=='mail'">
-              E-Mail
-            </ion-text>
-          </p>
+
           <!-- <p>Registrado em: {{ client.createdAt | date: 'short' }}</p> -->
         </ion-label>
 
-        <!-- <ion-note color="primary" slot="end" *ngIf="client.phone">
-          <ion-icon slot="icon-only" name="call"></ion-icon>
-        </ion-note> -->
+        <!-- <ion-note color="primary" slot="end" *ngIf="client.phone">{{ client.phone }}</ion-note> -->
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteAlertConfirm(client.id)">
+        <ion-item-option color="danger" (click)="deleteAlertConfirm(record.id)">
           <ion-icon slot="top" size="large" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="start">
-        <ion-item-option color="success" [routerLink]="['/record-register',client.id]">
-          <ion-icon slot="top" size="large" name="document"></ion-icon>
-          Nova Ficha
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

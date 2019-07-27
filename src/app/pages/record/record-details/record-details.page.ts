@@ -1,11 +1,10 @@
-import { CustomerRecord } from "src/app/interfaces/record";
-import { CallNumber } from "@ionic-native/call-number/ngx";
+import { ClientService } from "./../../../services/client.service";
+import { Client } from "src/app/interfaces/client";
 import { RecordService } from "./../../../services/record.service";
 import { AuthService } from "./../../../services/auth.service";
 import { ActivatedRoute } from "@angular/router";
-import { ClientService } from "./../../../services/client.service";
 import { Component, OnInit } from "@angular/core";
-import { Client } from "src/app/interfaces/client";
+import { CustomerRecord } from "src/app/interfaces/record";
 import {
   NavController,
   LoadingController,
@@ -15,62 +14,45 @@ import {
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-client-details",
-  templateUrl: "./client-details.page.html",
-  styleUrls: ["./client-details.page.scss"]
+  selector: "app-record-details",
+  templateUrl: "./record-details.page.html",
+  styleUrls: ["./record-details.page.scss"]
 })
-export class ClientDetailsPage implements OnInit {
+export class RecordDetailsPage implements OnInit {
+  private recordId: string = null;
   private clientId: string = null;
   private client: Client = {};
-  private customerRecord: any;
+  private customerRecord: CustomerRecord = {};
   private loading: any;
-  private clientSubscription: Subscription;
   private recordSubscription: Subscription;
+  private clientSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
+    private recordService: RecordService,
+    private clientService: ClientService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private clientService: ClientService,
-    private customRecordService: RecordService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
-    private callNumber: CallNumber
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
-    this.clientId = this.activatedRoute.snapshot.paramMap.get("id");
-    this.loadClient();
-    this.getCustomerRecords();
-    console.log(this.clientId);
+    this.recordId = this.activatedRoute.snapshot.paramMap.get("id");
+    this.loadRecord();
+
+    console.log(this.recordId);
   }
   ngOnDestroy() {
-    if (this.clientSubscription) this.clientSubscription.unsubscribe();
+    if (this.recordSubscription) this.recordSubscription.unsubscribe();
   }
-
-  loadClient() {
-    this.clientSubscription = this.clientService
-      .getClient(this.clientId)
+  loadRecord() {
+    this.recordSubscription = this.recordService
+      .getRecord(this.recordId)
       .subscribe(data => {
-        this.client = data;
+        this.customerRecord = data;
       });
-  }
-
-  getCustomerRecords() {
-    this.recordSubscription = this.customRecordService
-      .getCustomerRecord(this.clientId)
-      .subscribe(res => {
-        this.customerRecord = res;
-        console.log(this.customerRecord);
-      });
-  }
-
-  contactCustomer() {
-    this.callNumber
-      .callNumber(this.client.phone, true)
-      .then(res => console.log("Launch dialer!", res))
-      .catch(err => console.log("Error launching dialer", err));
   }
 
   async deleteAlertConfirm(id: string) {
@@ -90,10 +72,10 @@ export class ClientDetailsPage implements OnInit {
           text: "Sim",
           handler: () => {
             try {
-              this.clientService.deleteClient(id);
-              this.navCtrl.navigateBack("/clients-list");
+              this.recordService.deleteRecord(id);
+              this.navCtrl.navigateBack("/record-list");
             } catch (error) {
-              this.presentToast("Erro ao tentar apagar esta pessoa");
+              this.presentToast("Erro ao tentar apagar esta ficha");
             }
           }
         }

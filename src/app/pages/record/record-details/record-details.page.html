@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/record-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>DS Develop</ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button (click)="deleteAlertConfirm(record.id)">
+
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card-title>Ficha Nº:{{customerRecord.recordCode}}</ion-card-title>
+      <ion-card-subtitle>{{client.fullName}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Valor:</ion-label>
+        <ion-text color="dark">
+          R${{customerRecord.recordValue}}
+        </ion-text>
+      </ion-item>
+      <ion-item>
+
+        <ion-label>Pago:</ion-label>
+        <ion-text color="dark">
+          {{customerRecord.recordPaid}}
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <p>{{customerRecord.recordDescription}}</p>
+      </ion-item>
+    </ion-card-content>
+    <ion-footer>
+      <ion-toolbar>
+
+        <ion-button class="center-save__button" slot [routerLink]="['/record-register', recordId]">
+
+          Atualizar Registro
+          <ion-icon slot=" end" name="create">
+          </ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+
+
+  </ion-card>
+
+</ion-content>

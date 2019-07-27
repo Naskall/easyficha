@@ -1,3 +1,4 @@
+import { CallNumber } from "@ionic-native/call-number/ngx";
 import { PipesModule } from "./pipes/pipes.module";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
@@ -14,6 +15,9 @@ import { environment } from "src/environments/environment";
 import { AngularFireAuthModule } from "@Angular/fire/auth";
 import { AngularFirestoreModule } from "@Angular/fire/firestore";
 import { BrMaskerModule } from "br-mask";
+import { Http, HttpModule } from "@angular/http";
+import { ViacepProvider } from "src/providers/viacep/viacep.provider";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,10 +30,15 @@ import { BrMaskerModule } from "br-mask";
     AngularFireAuthModule,
     AngularFirestoreModule,
     PipesModule,
-    BrMaskerModule
+    BrMaskerModule,
+    HttpModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     StatusBar,
+    CallNumber,
+    ViacepProvider,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

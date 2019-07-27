@@ -59,34 +59,30 @@
   --ion-color-dark-shade: #1e2023;
   --ion-color-dark-tint: #383a3e;
 
-  body {
-    color: var(--ion-color-dark)
-  }
-
   /*----Mesmo preto para para todos os textos----*/
 
 
   /** medium **/
   --ion-color-medium: #989aa2;
   --ion-color-medium-rgb: 152,
-  154,
-  162;
+    154,
+    162;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255,
-  255,
-  255;
+    255,
+    255;
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
 
   /** light **/
   --ion-color-light: #f4f5f8;
   --ion-color-light-rgb: 244,
-  244,
-  244;
+    244,
+    244;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0,
-  0,
-  0;
+    0,
+    0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
@@ -97,6 +93,6 @@
   --ion-color-dark-records: #009679;
   --ion-color-soft-adjusts: #798285;
   --ion-color-dark-adjusts: #353D51;
-  --ion-background-color:#F4F7FA;
+  --ion-background-color: #F4F7FA;
 
 }

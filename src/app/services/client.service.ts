@@ -11,12 +11,10 @@ import { map } from "rxjs/operators";
 })
 export class ClientService {
   private clientsCollection: AngularFirestoreCollection<Client>;
-  private isItemAvailable: boolean;
-  items: any;
+  private clientId = "";
 
   constructor(private afs: AngularFirestore) {
     this.clientsCollection = this.afs.collection<Client>("Clients");
-    this.isItemAvailable = false;
   }
 
   getClients() {
@@ -33,8 +31,17 @@ export class ClientService {
   addClient(client: Client) {
     return this.clientsCollection.add(client);
   }
+
   getClient(id: string) {
     return this.clientsCollection.doc<Client>(id).valueChanges();
+  }
+
+  getCustomer(id: string) {
+    return this.afs
+      .collection<Client>("Clients", ref => {
+        return ref.where("clientId", "==", this.clientId);
+      })
+      .snapshotChanges();
   }
   updateClient(id: string, client: Client) {
     return this.clientsCollection.doc<Client>(id).update(client);
