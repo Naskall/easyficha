@@ -1,3 +1,4 @@
+
 import { CustomerRecord } from "src/app/interfaces/record";
 import { CallNumber } from "@ionic-native/call-number/ngx";
 import { RecordService } from "./../../../services/record.service";
@@ -22,7 +23,7 @@ import { Subscription } from "rxjs";
 export class ClientDetailsPage implements OnInit {
   private clientId: string = null;
   private client: Client = {};
-  private customerRecord: any;
+  public records:any;
   private loading: any;
   private clientSubscription: Subscription;
   private recordSubscription: Subscription;
@@ -60,9 +61,9 @@ export class ClientDetailsPage implements OnInit {
   getCustomerRecords() {
     this.recordSubscription = this.customRecordService
       .getCustomerRecord(this.clientId)
-      .subscribe(res => {
-        this.customerRecord = res;
-        console.log(this.customerRecord);
+      .subscribe(data => {
+        console.log(data)
+        return (this.records = data)
       });
   }
 
