@@ -1,4 +1,3 @@
-
 import { CustomerRecord } from "src/app/interfaces/record";
 import { CallNumber } from "@ionic-native/call-number/ngx";
 import { RecordService } from "./../../../services/record.service";
@@ -13,7 +12,9 @@ import {
   ToastController,
   AlertController
 } from "@ionic/angular";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
+
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-client-details",
@@ -23,10 +24,10 @@ import { Subscription } from "rxjs";
 export class ClientDetailsPage implements OnInit {
   private clientId: string = null;
   private client: Client = {};
-  public records:any;
   private loading: any;
   private clientSubscription: Subscription;
   private recordSubscription: Subscription;
+  private records: CustomerRecord[];
 
   constructor(
     private authService: AuthService,
@@ -42,12 +43,17 @@ export class ClientDetailsPage implements OnInit {
 
   ngOnInit() {
     this.clientId = this.activatedRoute.snapshot.paramMap.get("id");
+
+    //console.log(this.clientId);
+  }
+
+  ngOnDestroy() {
+    //if (this.clientSubscription) this.clientSubscription.unsubscribe();
+  }
+
+  ionViewDidEnter() {
     this.loadClient();
     this.getCustomerRecords();
-    console.log(this.clientId);
-  }
-  ngOnDestroy() {
-    if (this.clientSubscription) this.clientSubscription.unsubscribe();
   }
 
   loadClient() {
@@ -61,9 +67,14 @@ export class ClientDetailsPage implements OnInit {
   getCustomerRecords() {
     this.recordSubscription = this.customRecordService
       .getCustomerRecord(this.clientId)
-      .subscribe(data => {
-        console.log(data)
-        return (this.records = data)
+      .subscribe(async data => {
+        this.records = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          } as CustomerRecord;
+        });
+        // console.log(this.records);
       });
   }
 

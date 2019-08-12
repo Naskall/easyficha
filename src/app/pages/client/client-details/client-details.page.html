@@ -91,13 +91,20 @@
     <ion-card-content>
       <ion-list>
         <ion-item-sliding *ngFor="let record of records">
+          <ion-list *ngIf="records.length < 0">
+            <ion-label>Nenhuma Ficha Cadastrada</ion-label>
+          </ion-list>
           <ion-item
             button
             [routerLink]="['/record-details', record.id]"
             routerDirection="forward"
+            *ngIf="records.length > 0"
           >
             <ion-label>
-              <pre>Stringify: {{ JSON.stringify(record) }}</pre>
+              <p>Nº:{{ record.recordCode }}</p>
+              <p>Data:{{ record.recordDate }}</p>
+              <p>Valor:{{ record.recordValue }}</p>
+              <p>Pago:{{ record.recordPaid }}</p>
             </ion-label>
           </ion-item>
 

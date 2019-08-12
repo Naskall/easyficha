@@ -5,10 +5,13 @@ import {
   AngularFirestore
 } from "@Angular/fire/firestore";
 import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { TouchSequence } from "selenium-webdriver";
 @Injectable({
   providedIn: "root"
 })
 export class RecordService {
+  private records: Observable<CustomerRecord[]>;
   private recordsCollection: AngularFirestoreCollection<CustomerRecord>;
 
   constructor(private afs: AngularFirestore) {
@@ -37,10 +40,13 @@ export class RecordService {
 
   getCustomerRecord(clientId: string) {
     return this.afs
-      .collection<CustomerRecord>("Records", ref => {
-        return ref.where("clientId", "==", clientId);
-      })
+      .collection("Records", ref => ref.where("clientId", "==", clientId))
       .snapshotChanges();
+    // return this.afs
+    //   .collection<CustomerRecord>("Records", ref => {
+    //     return ref.where("clientId", "==", clientId);
+    //   })
+    //   .snapshotChanges();
   }
 
   updateRecord(id: string, record: CustomerRecord) {
