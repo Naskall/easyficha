@@ -34,7 +34,7 @@ export class ClientDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private clientService: ClientService,
-    private customRecordService: RecordService,
+    private customerRecordService: RecordService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
@@ -65,7 +65,7 @@ export class ClientDetailsPage implements OnInit {
   }
 
   getCustomerRecords() {
-    this.recordSubscription = this.customRecordService
+    this.recordSubscription = this.customerRecordService
       .getCustomerRecord(this.clientId)
       .subscribe(async data => {
         this.records = data.map(e => {

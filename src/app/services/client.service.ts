@@ -5,13 +5,15 @@ import {
 import { Injectable } from "@angular/core";
 import { Client } from "../interfaces/client";
 import { map } from "rxjs/operators";
+import { resolve } from 'dns';
+import { reject } from 'q';
 
 @Injectable({
   providedIn: "root"
 })
 export class ClientService {
   private clientsCollection: AngularFirestoreCollection<Client>;
-  private clientId = "";
+  private clientId = id;
 
   constructor(private afs: AngularFirestore) {
     this.clientsCollection = this.afs.collection<Client>("Clients");
@@ -36,13 +38,15 @@ export class ClientService {
     return this.clientsCollection.doc<Client>(id).valueChanges();
   }
 
-  getCustomer(id: string) {
+  getCustomerData(clientId: string) {
     return this.afs
-      .collection<Client>("Clients", ref => {
-        return ref.where("clientId", "==", this.clientId);
-      })
-      .snapshotChanges();
+      .collection("Clients").doc(clientId).valueChanges().subscribe((collection) => {
+        if (collection) {
+          resolve(collection);
+        }
+      }, err => reject(err))
   }
+
   updateClient(id: string, client: Client) {
     return this.clientsCollection.doc<Client>(id).update(client);
   }

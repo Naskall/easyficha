@@ -1,4 +1,4 @@
-import { map, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { AuthService } from "./../../../services/auth.service";
 import {
@@ -11,7 +11,7 @@ import { ClientService } from "./../../../services/client.service";
 import { Subscription } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 import { Client } from "src/app/interfaces/client";
-import { Http, HttpModule } from "@angular/http";
+import { Http } from "@angular/http";
 
 import {
   FormBuilder,
@@ -29,7 +29,7 @@ export class ClientRegisterPage implements OnInit {
   private loading: any;
   private clientSubscription: Subscription;
   public client: Client = {};
-  public customer: any;
+  public customerData: Client[];
   private clientId: string = null;
   public fGroupClient: FormGroup;
 
@@ -40,13 +40,10 @@ export class ClientRegisterPage implements OnInit {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
-
     public http: Http,
     public fBuilderClient: FormBuilder
   ) {
     if (this.clientId) {
-      this.loadClient();
-      this.fillFields();
       this.fGroupClient = this.fBuilderClient.group({
         fullName: [null, Validators.compose([Validators.required])],
         cpf: [
@@ -110,22 +107,39 @@ export class ClientRegisterPage implements OnInit {
       pushType: new FormControl(client.pushType)
     });
   }
+
   ngOnInit() {
     this.clientId = this.activatedRoute.snapshot.paramMap.get("id");
-    this.loadClient();
+    this.getCustomerById();
     this.fillFields();
+    console.log(this.clientId);
   }
+
   ngOnDestroy() {
     if (this.clientSubscription) this.clientSubscription.unsubscribe();
   }
 
-  loadClient() {
+  // loadClient() {
+  //   this.clientSubscription = this.clientService
+  //     .getCustomer(this.client.id)
+  //     .subscribe(data => {
+  //       this.customer = data;
+  //       console.log("Customer Id:" + this.clientId);
+  //       console.log("Dados do cliente:" + this.customer);
+  //     });
+  // }
+
+  getCustomerById() {
     this.clientSubscription = this.clientService
-      .getCustomer(this.client.id)
-      .subscribe(data => {
-        this.customer = data;
-        console.log("Customer Id:" + this.clientId);
-        console.log("Dados:" + data);
+      .getCustomerData(this.clientId)
+      .subscribe(async data => {
+        this.customerData = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          } as Client;
+        });
+        console.log(this.customerData);
       });
   }
 
@@ -146,8 +160,9 @@ export class ClientRegisterPage implements OnInit {
         .setValue(this.client.maxPaymentDay);
       this.fGroupClient.get("timeToPush").setValue(this.client.timeToPush);
       this.fGroupClient.get("pushType").setValue(this.client.pushType);
+      console.log(this.client.fullName);
     } else {
-      console.log("deu erro");
+      console.log("Falha ao preencher campos");
     }
   }
 
@@ -189,7 +204,6 @@ export class ClientRegisterPage implements OnInit {
         .pipe(map(res => res.json()))
         .subscribe(data => {
           this.fillAddress(data);
-          console.log(data);
         });
     }
     // this.viacep.callService(this.cep).subscribe(data => {
