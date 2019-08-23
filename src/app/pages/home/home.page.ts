@@ -2,7 +2,7 @@ import { AngularFirestore } from "@Angular/fire/firestore";
 import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import Chart from "chart.js";
-import { CONTEXT } from "@angular/core/src/render3/interfaces/view";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -13,7 +13,29 @@ export class HomePage {
   public clients: any[];
   public records: any[];
   public loadadedClientList: any[];
-  public loadadedRecodsList: any[];
+  public loadadedRecordsList: any[];
+  data: Observable<any[]>;
+
+  months = [
+    { value: 0, name: "Janeiro" },
+    { value: 1, name: "Fevereiro" },
+    { value: 2, name: "Março" },
+    { value: 3, name: "Abril" },
+    { value: 4, name: "Maio" },
+    { value: 5, name: "Junho" },
+    { value: 6, name: "Julho" },
+    { value: 7, name: "Agosto" },
+    { value: 8, name: "Setembro" },
+    { value: 9, name: "Outubro" },
+    { value: 10, name: "Novembro" },
+    { value: 11, name: "Dezembro" }
+  ];
+
+  transaction = {
+    value: 0,
+    expense: false,
+    month: 0
+  };
   /*Id do canvas no html */
   @ViewChild("barMonthlyCanvas") barMonthlyCanvas;
   @ViewChild("barWeacklyCanvas") barWeacklyCanvas;
@@ -24,10 +46,15 @@ export class HomePage {
   lineYearChart: any;
   AuthService: any;
 
+  monthlyChartValue = null;
+  weacklyChartValue = null;
+  yearChartValue = null;
+
   constructor(
     private authService: AuthService,
     private fireStore: AngularFirestore
   ) {}
+
   ngOnInit() {
     this.fireStore
       .collection("Clients")
@@ -37,6 +64,7 @@ export class HomePage {
         this.loadadedClientList = clients;
       });
   }
+
   initializeItems(): void {
     this.clients = this.loadadedClientList;
   }
@@ -66,6 +94,9 @@ export class HomePage {
       this.barWeacklyChart = this.getWeacklyBarChart();
       this.lineYearChart = this.getYearLineChart();
     }, 150);
+  }
+  ionViewDidLoad() {
+    // this.ref= this.
   }
 
   getChart(CONTEXT, chartType, data, options?) {
