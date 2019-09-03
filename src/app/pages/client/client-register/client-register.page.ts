@@ -44,6 +44,7 @@ export class ClientRegisterPage implements OnInit {
     public fBuilderClient: FormBuilder
   ) {
     if (this.clientId) {
+      //-----Validar dados -------------//
       this.fGroupClient = this.fBuilderClient.group({
         fullName: [null, Validators.compose([Validators.required])],
         cpf: [
@@ -130,17 +131,11 @@ export class ClientRegisterPage implements OnInit {
   // }
 
   getCustomerById() {
-    this.clientSubscription = this.clientService
-      .getCustomerData(this.clientId)
-      .subscribe(async data => {
-        this.customerData = data.map(e => {
-          return {
-            id: e.payload.doc.id,
-            ...e.payload.doc.data()
-          } as Client;
-        });
-        console.log(this.customerData);
-      });
+    this.clientService.getCustomerData(this.clientId).then(async data => {
+      this.customerData = data as Client[];
+      this.fillFields();
+      console.log(this.customerData);
+    });
   }
 
   fillFields() {
@@ -160,7 +155,6 @@ export class ClientRegisterPage implements OnInit {
         .setValue(this.client.maxPaymentDay);
       this.fGroupClient.get("timeToPush").setValue(this.client.timeToPush);
       this.fGroupClient.get("pushType").setValue(this.client.pushType);
-      console.log(this.client.fullName);
     } else {
       console.log("Falha ao preencher campos");
     }

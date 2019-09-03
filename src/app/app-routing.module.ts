@@ -62,7 +62,9 @@ const routes: Routes = [
     loadChildren:
       "./pages/record/record-details/record-details.module#RecordDetailsPageModule",
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'history', loadChildren: './pages/history/history/history.module#HistoryPageModule' },
+  { path: 'monitoring', loadChildren: './pages/monitoring/monitoring/monitoring.module#MonitoringPageModule' }
 ];
 
 @NgModule({

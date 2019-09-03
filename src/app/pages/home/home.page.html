@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar mode="md" color="dark">
-    <ion-icon slot="start" size="large" name="menu"></ion-icon>
+  <ion-toolbar color="dark">
+    <!-- <ion-icon slot="start" size="large" name="menu"></ion-icon> -->
     <ion-title>DS Develop</ion-title>
 
     <ion-icon slot="end" size="large" name="notifications"></ion-icon>
@@ -11,31 +11,31 @@
 
   </ion-toolbar>
 </ion-header>
-<!--- 
+
 <ion-fab vertical="bottom" horizontal="end">
   <ion-fab-button>
-    <ion-icon name="add"></ion-icon>
+    <ion-icon name="apps"></ion-icon>
   </ion-fab-button>
-  <ion-fab-list side="top">
-    <ion-fab-button class="in-item__fab" router-direction href="/clients">
-      <ion-icon name="person"></ion-icon>
+  <ion-fab-list side="start">
+    <ion-fab-button class="in-item__fab" router-direction href="/monitoring">
+      <ion-icon name="eye"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button class="in-item__fab" router-direction href="/fichas">
-      <ion-icon name="clipboard"></ion-icon>
+    <ion-fab-button class="in-item__fab" router-direction href="/history">
+      <ion-icon name="time"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
-</ion-fab> -->
+</ion-fab> 
 
 <ion-content>
   <ion-toolbar>
     <ion-searchbar showCancelButton (ion-input)='filterList($e)' placeholder="Buscar cliente ou ficha">
     </ion-searchbar>
-    <!-- <ion-list>
+     <!-- <ion-list>
       <ion-item *ngFor="let client of clients">
         <ion-label>{{client.name}}</ion-label>
         <ion-label>{{client.phone }}</ion-label>
       </ion-item>
-    </ion-list>--->
+    </ion-list> -->
   </ion-toolbar>
 
   <ion-card href="/clients-list">

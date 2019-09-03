@@ -461,10 +461,10 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
-"@ionic-native/call-number@^5.10.0":
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/call-number/-/call-number-5.11.0.tgz#eb0e3c0b70bcc6ceaef67d6e7bdc91dedc3cdca3"
-  integrity sha512-r/JxWasZVU8aCyg4tqa3pAndxot3x7DjxO4ZIBrQGlgZYlCtVOnrCq0yJUcyeE6lmSWTLAmvjmk/+ORwOtJkQA==
+"@ionic-native/call-number@^5.12.0":
+  version "5.12.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/call-number/-/call-number-5.12.0.tgz#0aa26b7540528386aecee623849e5889625f007e"
+  integrity sha512-+ezdNyXc/m0Pge1z6Cb02RP3WVIedgAIWhxuXc3EXuVOd6qqVKFtHOrygupt6tMmyuntVxpbEw7y3N0AhZL1mA==
   dependencies:
     "@types/cordova" latest
 

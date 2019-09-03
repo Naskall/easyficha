@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+          <ion-back-button text="Voltar" defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Histórico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <section id="cd-timeline" class="cd-container">
+        <div ng-repeat="activity in timeline">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-icon dark">
+              <i class="ion-image timelineIcon"><ion-icon name="basket"></ion-icon> </i>
+            
+            </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content dark">
+              <h5 class="marginBottom0 marginTop0">Compra de Panelas</h5>
+              <p class="marginTop5 cd-author">Fulano de Tal</p>
+              <p class="timelineText">Lorem Ipsum Dolo si met atanus</p>
+            </div>
+          </div>
+        </div>
+      </section>
+</ion-content>
